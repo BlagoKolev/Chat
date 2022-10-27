@@ -5,24 +5,51 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Chat.Hubs
 {
+    [Authorize]
     public class ChatHub : Hub
     {
-        //private UserManager<ApplicationUser>? _userManager;
-
-        public ChatHub(UserManager<ApplicationUser> userManager)
-        {
-            //this._userManager = userManager;
-        }
-        [Authorize]
+        static HashSet<string> connectedUsers = new HashSet<string>();
+      
         public async Task SendGlobalMessage()
+        {
+            var username = GetUsername();
+            await Clients.All.SendAsync("receiveGlobalMessage", username);
+        }
+
+        public override Task OnConnectedAsync()
+        {
+            //var connectionId = Context.ConnectionId;
+
+            var userName = GetUsername();
+
+            connectedUsers.Add(userName);
+
+            Clients.All
+                .SendAsync("updateConnectedUsers", connectedUsers)
+                .GetAwaiter()
+                .GetResult();
+
+            return base.OnConnectedAsync();
+        }
+
+        public override Task OnDisconnectedAsync(Exception? exception)
+        {
+            var username = GetUsername();
+            connectedUsers.Remove(username);
+            Clients.All
+                .SendAsync("updateConnectedUsers", connectedUsers)
+                .GetAwaiter()
+                .GetResult();
+            return base.OnDisconnectedAsync(exception);
+        }
+
+        private string GetUsername()
         {
             var user = Context.User.Identity;
             var index = user.Name.IndexOf('@');
             var username = user.Name.Substring(0, index);
-
-            await Clients.All.SendAsync("receiveGlobalMessage", username);
+            return username;
         }
-
 
     }
 }

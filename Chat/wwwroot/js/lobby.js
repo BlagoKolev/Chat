@@ -1,17 +1,27 @@
-﻿console.log("before")
-
-//Create connection
+﻿//Create connection
 var connection = new signalR
     .HubConnectionBuilder()
     .withUrl("/hubs/chat")
     .build();
-console.log("after")
+
 //methods that Hub uses to connect to client
 
 connection.on("receiveGlobalMessage", (userName) => {
     var globalMessageContainer = document.getElementById('globalMessage');
     globalMessageContainer.innerText = `${userName} has joined to Lobby`;
-})
+    
+});
+
+connection.on("updateConnectedUsers", (connectedUsers) => {
+    var connectedUsersList = document.getElementById("online-users-list");
+    connectedUsersList.innerHTML = "";
+    connectedUsers.map(x => {
+        var user = document.createElement("li");
+        user.className = "user";
+        user.innerText = x;
+        connectedUsersList.appendChild(user);
+    })
+});
 
 //Method that Invoke Hub method
 function InvokeSendGlobalMessage() {
