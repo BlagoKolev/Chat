@@ -21,3 +21,49 @@ a {
     text-decoration: none;
     color: brown;
 }
+
+.chat{
+    display:flex;
+    flex-direction:column;
+}
+
+.message-board {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    width: 80%;
+    height: 30rem;
+    align-self:center;
+    background-color:antiquewhite;
+    border: 1px solid black;
+    border-radius: 1rem;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.message-write {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+    .message-write form {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        align-items: flex-end;
+        background-color: antiquewhite;
+        border: 1px solid black;
+        border-radius: 1rem;
+    }
+
+.write {
+    width: 80%;
+    margin: 0.5rem;
+}
+
+
+.send {
+    margin-right: 0.5rem;
+}

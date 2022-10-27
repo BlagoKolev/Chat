@@ -7,19 +7,34 @@
     {
         <div class="text-center">
             <h1 class="display-4">Welcome</h1>
-            <h3>This is our Lobby</h3>
+            <h2>to our chat application</h2>
+            <hr>
             <h4>To proceed to chat rooms please <b><a asp-area="Identity" asp-page="/Account/Login">Login</a></b></h4>
-            <h4>or 
-            <b><a asp-area="Identity" asp-page="/Account/Login">Register</a></b> if you do not have account yet.</h4>
+            <h4>
+                or
+                <b><a asp-area="Identity" asp-page="/Account/Login">Register</a></b> if you do not have account yet.
+            </h4>
         </div>
 
     }
     else
     {
         <div class="text-center">
-            <h1 class="display-4">Welcome</h1>
             <p>This is our Lobby</p>
-            <p id="globalMessage"></p>
+
+            <div class="chat">
+                <div class="message-board">
+                    <p id="globalMessage"></p>
+                </div>
+
+                <div class="message-write">
+                    <form>
+                        <textarea class="write" rows="3"></textarea>
+                        <input class="send" type="submit" value="Send" />
+                    </form>
+
+                </div>
+            </div>
         </div>
     }
 }

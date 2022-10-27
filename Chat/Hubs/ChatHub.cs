@@ -16,8 +16,11 @@ namespace Chat.Hubs
         [Authorize]
         public async Task SendGlobalMessage()
         {
-            var user = Context.User.Identity.Name;
-            await Clients.All.SendAsync("receiveGlobalMessage",user);
+            var user = Context.User.Identity;
+            var index = user.Name.IndexOf('@');
+            var username = user.Name.Substring(0, index);
+
+            await Clients.All.SendAsync("receiveGlobalMessage", username);
         }
 
 
