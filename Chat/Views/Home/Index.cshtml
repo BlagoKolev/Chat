@@ -2,7 +2,30 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@{
+    if (!this.User.Identity.IsAuthenticated)
+    {
+        <div class="text-center">
+            <h1 class="display-4">Welcome</h1>
+            <h3>This is our Lobby</h3>
+            <h4>To proceed to chat rooms please <b><a asp-area="Identity" asp-page="/Account/Login">Login</a></b></h4>
+            <h4>or 
+            <b><a asp-area="Identity" asp-page="/Account/Login">Register</a></b> if you do not have account yet.</h4>
+        </div>
+
+    }
+    else
+    {
+        <div class="text-center">
+            <h1 class="display-4">Welcome</h1>
+            <p>This is our Lobby</p>
+            <p id="globalMessage"></p>
+        </div>
+    }
+}
+
+
+
+
+<script src="~/js/signalr.js"></script>
+<script src="~/js/lobby.js"></script>
