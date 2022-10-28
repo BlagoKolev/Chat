@@ -9,8 +9,11 @@ namespace Chat.Data.Models
             this.FriendsList = new List<ApplicationUser>();
             this.BlackList = new List<ApplicationUser>();
         }
-        public ICollection<ApplicationUser> FriendsList { get; set; }
-        public ICollection<ApplicationUser> BlackList { get; set; }
+        public virtual ICollection<ApplicationUser> BlackList { get; set; }
+        public virtual ICollection<ApplicationUser> FriendsList { get; set; }
         public bool IsOnline { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
+
+
     }
 }

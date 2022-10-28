@@ -19,6 +19,6 @@ namespace Chat.Data
         }
 
         public override DbSet<ApplicationUser> Users { get; set; }
-
+        public DbSet<Message> Messages { get; set; }
     }
 }

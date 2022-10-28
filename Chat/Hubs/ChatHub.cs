@@ -9,6 +9,7 @@ namespace Chat.Hubs
     public class ChatHub : Hub
     {
         static HashSet<string> connectedUsers = new HashSet<string>();
+        static Dictionary<string, string> messageContainer = new();
       
         public async Task SendGlobalMessage()
         {
